@@ -456,7 +456,7 @@ button.act.pri{background:#5C3D0A;color:#F5EDD6;border-color:#3A2008}button.act.
 
 <div id="splash-modal" class="show">
   <img id="splash-img" src="https://raw.githubusercontent.com/Cuttshow/Splash/refs/heads/main/IMG_3706.JPG" onload="this.classList.add('loaded')" alt="Royal Convoy"/>
-  <button id="splash-btn" onclick="dismissSplash()">⚔ Begin Your Journey ⚔</button>
+  <button id="splash-btn">⚔ Begin Your Journey ⚔</button>
 </div>
 <div id="mode-modal">
   <div id="mode-box">
@@ -1547,7 +1547,7 @@ var ARRIVAL_LINES_QUEEN=[
 ];
 var _arrivalCB=null;
 function showRoyalArrival(pid,isQueen,onDone){
-  playRoyalFanfare();
+  // playRoyalFanfare();  // Audio removed
   var k=pid===0?_p1K:_p2K;
   var royalName=isQueen?(k?k.queenName:'the Queen'):(k?(k.kingName||k.name):'the King');
   var lines=isQueen?ARRIVAL_LINES_QUEEN:ARRIVAL_LINES_KING;
@@ -1574,9 +1574,9 @@ function applyKingdomBonuses(){
   });
 }
 function dismissSplash(){
-  // Play intro music via Web Audio API
-  unlockAudio();
-  playIntroMusic();
+  // Audio removed - skip music playback
+  // unlockAudio();
+  // playIntroMusic();
   // Hide the button but keep splash visible as background
   var sb=document.getElementById('splash-btn'); sb.style.display='none';
   document.getElementById('splash-modal').style.zIndex='50';
@@ -1929,9 +1929,9 @@ var _royalBuffers=[null,null,null,null];
 var _royalPlayOrder=[];
 var _royalPlayIdx=0;
 var _ROYAL_B64S=[
-""
-""
-""
+"",
+"",
+"",
 ""
 ];
 
@@ -2896,6 +2896,8 @@ window.addEventListener('load', function(){
   applyKingdomBonuses();
   buildDOM(); render();
   document.getElementById('mode-modal').classList.add('show');
+  // Attach click handler to splash button
+  document.getElementById('splash-btn').addEventListener('click', dismissSplash);
 });
 </script>
 </body>
